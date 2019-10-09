@@ -9,6 +9,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, outputDirectory),
     filename: "bundle.js"
+    
   },
   module: {
     rules: [
@@ -50,6 +51,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       favicon: "./public/favicon.ico"
-    })
+    }),
+    new CleanWebpackPlugin({dry: true})
   ]
 };
