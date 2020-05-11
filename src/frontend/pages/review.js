@@ -4,13 +4,13 @@ const nameInput = document.querySelector('input.nameInput');
 const emailInput = document.querySelector('input.emailInput');
 const guestInput = document.querySelector('input.guestInput');
 const h2 = document.querySelector('h2.mealId');
-const h3 = document.querySelector('h3.formH3');
+const h3 = document.querySelector('h3.formHead');
 let id;
 async function review(req, res) {
   //console.log(req.param.id);
   getBodyContainer();  
-  id = 3;
-  //h2.innerHTML += id;
+  id = req.params.id;
+  h2.innerHTML += id;
   const data = await fetchServer(3);
   await renderHTML(data);
     
@@ -44,7 +44,7 @@ function getBodyContainer(){
   </header>  <!--header end--> 
   <aside> 
         <form action="/api/reviews" class="reviewForm">
-            <h3 class="formH3">Fill in The Review Form </h3>
+            <h3 class="formHead">Fill in The Review Form </h3>
             <label for="name">Review Form</label> 
             <input type="text" class="titleInput" required placeholder="Title">               
             <input type="text" class="descriptionInput" required placeholder="Description">
@@ -63,9 +63,9 @@ function getBodyContainer(){
             <ul class="searchMealList"></ul>
         </div>
         <div class="backgroudPic">      
-            <img src="./background/vegan.jpg" alt="background picture">
-            <img src="./background/vegan2.jpg" alt="background picture">
-            <img src="./background/meat.jpg" alt="background picture">
+            <img src="../assets/background/vegan.jpg" alt="background picture">
+            <img src="../assets/background/vegan2.jpg" alt="background picture">
+            <img src="../assets/background/meat.jpg" alt="background picture">
         </div>
         
     </div>       
