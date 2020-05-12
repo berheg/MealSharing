@@ -6,7 +6,7 @@ const guestInput = document.querySelector('input.guestInput');
 const h2 = document.querySelector('h2.mealId');
 const h3 = document.querySelector('h3.formH3');
 let id;
-async function mealsId(req, router) { 
+async function mealsId(req, router) {
   getBodyContainer();
   id = req.param.id;
   h2.innerHTML += id;
@@ -58,9 +58,9 @@ function getBodyContainer(){
     />
     <h1 class="logo-h1">ZOLLA RESTURANT</h1>
     <nav class="navbar">
-      <a href="./mealId.html">Menu</a>
+      <a href="/meals>Menu</a>
       <a href="">Reservations</a>
-      <a href="./review.html">Review</a>
+      <a href="/review">Review</a>
     </nav>
   </header>  <!--header end-->
   <aside>
@@ -84,9 +84,9 @@ function getBodyContainer(){
       <ul class="searchMealList"></ul>
     </div>
     <div class="backgroudPic">
-      <img src="./background/vegan.jpg" alt="background picture">
-      <img src="./background/vegan2.jpg" alt="background picture">
-      <img src="./background/mixed.jpg" alt="background picture">
+      <img src="../../../assets/vegan.jpg" alt="background picture">
+      <img src="../../../assets/vegan2.jpg" alt="background picture">
+      <img src="../../../assets/meat.jpg" alt="background picture">
     </div>
     </div>
     <h2 class="mealId">Meal with id: </h2>
