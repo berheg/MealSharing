@@ -2,3 +2,19 @@
 * {
   font-family: 'Montserrat', sans-serif;
 }
+body{
+  text-align: center;
+}
+aside{
+  float:right;
+}
+.reservationForm{
+  display: flex;
+  flex-direction: column;
+}
+footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 100px;
+}
