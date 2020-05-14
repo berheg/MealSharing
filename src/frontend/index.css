@@ -8,9 +8,16 @@ body{
 aside{
   float:right;
 }
+li{
+  list-style-type: none;
+}
 .reservationForm{
   display: flex;
   flex-direction: column;
+}
+.mealBox{
+  display: flex;
+  flex-direction: row;
 }
 footer{
   display: flex;
