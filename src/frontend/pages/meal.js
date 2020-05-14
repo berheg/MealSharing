@@ -3,24 +3,31 @@ const phoneInput = document.querySelector('input.phoneInput');
 const nameInput = document.querySelector('input.nameInput');
 const emailInput = document.querySelector('input.emailInput');
 const guestInput = document.querySelector('input.guestInput');
+const searchInput = document.querySelector('input.searchInput');
+const listSelect = document.querySelector('list.listSelect');
 const h2 = document.querySelector('h2.mealId');
 const h3 = document.querySelector('h3.formH3');
 let id;
 async function mealsId(req, router) {
   getBodyContainer();
-  id = req.param.id;
-  h2.innerHTML += id;
-  const data = await fetchServer(req.param.id);
+  //id = req.param.id;
+  //h2.innerHTML += id;
+  const data = await fetchServer();
   await renderHTML(data);
-
+  formBtn.addEventListener('click', formBtnEventHandler)
+  searchBtn.addEventListener('keyup',inputEventHandler);
+  searchInput.addEventListener('keyup',inputEventHandler);
+  listSelect.addEventListener('click', () =>searchInput.innerHTML = listSelect.value);
+  //search input blur event handler
+  searchInput.addEventListener('blur', () =>{
+  searchInput.value = '';
+  selectListDiv.style.display = none;
+});
 }
 mealsId();
-formBtn.addEventListener('click', formBtnEventHandler)
-//searchBtn.addEventListener('keyup',inputEventHandler);
-searchInput.addEventListener('keyup',inputEventHandler);
-listSelect.addEventListener('click', () =>searchInput.innerHTML = listSelect.value);
-async function fetchServer(id){
-  const res = await fetch(`/api/meals/${id}`);
+
+async function fetchServer(){
+  const res = await fetch(`/api/meals/`);
   const jsonData = await res.json();
   console.log(jsonData[0]);
   console.log(jsonData);
@@ -58,7 +65,7 @@ function getBodyContainer(){
     />
     <h1 class="logo-h1">ZOLLA RESTURANT</h1>
     <nav class="navbar">
-      <a href="/meals>Menu</a>
+      <a href="/meals">Menu</a>
       <a href="">Reservations</a>
       <a href="/review">Review</a>
     </nav>
@@ -125,11 +132,7 @@ async function formBtnEventHandler(){
       console.log(err);
     });
   };
-  //search input blur event handler
-searchInput.addEventListener('blur', () =>{
-  searchInput.value = '';
-  selectListDiv.style.display = none;
-});
+
 //search product lists with searchkey
 function searchMealList(searchKey){
   console.log(mealLists);
