@@ -3,23 +3,30 @@ const phoneInput = document.querySelector('input.phoneInput');
 const nameInput = document.querySelector('input.nameInput');
 const emailInput = document.querySelector('input.emailInput');
 const guestInput = document.querySelector('input.guestInput');
+const searchInput = document.querySelector('input.searchInput');
+const listSelect = document.querySelector('list.listSelect');
 const h2 = document.querySelector('h2.mealId');
 const h3 = document.querySelector('h3.formHead');
 let id;
 async function review(req, res) {
   //console.log(req.param.id);
   getBodyContainer();
-  id = req.params.id;
-  h2.innerHTML += id;
+  //id = req.params.id;
+  //h2.innerHTML += id;
   const data = await fetchServer(3);
   await renderHTML(data);
-
+  formBtn.addEventListener('click', formBtnEventHandler)
+  //searchBtn.addEventListener('keyup',inputEventHandler);
+  searchInput.addEventListener('keyup',inputEventHandler);
+  listSelect.addEventListener('click', () =>searchInput.innerHTML = listSelect.value);
+  //search input blur event handler
+  searchInput.addEventListener('blur', () =>{
+  searchInput.value = '';
+  selectListDiv.style.zIndex = -2;
+});
 }
-review();
-formBtn.addEventListener('click', formBtnEventHandler)
-//searchBtn.addEventListener('keyup',inputEventHandler);
-searchInput.addEventListener('keyup',inputEventHandler);
-listSelect.addEventListener('click', () =>searchInput.innerHTML = listSelect.value);
+//review();
+
 async function fetchServer(id){
   const res = await fetch(`/api/meals/${id}`);
   const jsonData = await res.json();
@@ -99,11 +106,7 @@ async function formBtnEventHandler(){
       console.log(err);
     });
   };
-  //search input blur event handler
-searchInput.addEventListener('blur', () =>{
-  searchInput.value = '';
-  selectListDiv.style.zIndex = -2;
-});
+
 //search product lists with searchkey
 function searchMealList(searchKey){
   console.log(mealLists);
