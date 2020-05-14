@@ -13,7 +13,7 @@ const options = {
 const router = new SPARouter(options);
 
 router.get("/", homeRouter(req, router));
-router.get("/meals/{id}", mealRouter(req, router));
+router.get("/meals", mealRouter(req, router));
 router.get("/review", reviewRouter(req, router));
 
 router.init();
