@@ -3,11 +3,12 @@ async function homeRouter(req, router) {
   const data = await fetchServer();
   renderHTML(data);
 }
-mealsId();
+//mealsId();
 async function fetchServer(){
   const res = await fetch(`/api/meals`);
   const jsonData = await res.json();
-  return jsonData;
+  await console.log(jsonData);
+  return JSON.parse(jsonData);
 }
 //renders lists of data
 function renderHTML(data){
