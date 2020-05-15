@@ -19,6 +19,15 @@ li{
   display: flex;
   flex-direction: row;
 }
+.navbar{
+  margin-left: 25%;
+  text-decoration-style: double;
+  font-size: 30px;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+}
 footer{
   display: flex;
   flex-direction: row;
