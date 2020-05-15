@@ -24,7 +24,7 @@ async function mealsId(req, router) {
   selectListDiv.style.display = none;
 });
 }
-mealsId();
+//mealsId();
 
 async function fetchServer(){
   const res = await fetch(`/api/meals/`);
