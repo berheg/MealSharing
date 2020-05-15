@@ -2,8 +2,10 @@ async function homeRouter(req, router) {
   getBodyContainer();
   const data = await fetchServer();
   renderHTML(data);
+  console.log(`Welcome to my home page! The request url is ${req.url}`);
 }
 //mealsId();
+
 async function fetchServer(){
   const res = await fetch(`/api/meals`);
   const jsonData = await res.json();
