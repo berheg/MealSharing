@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import "./index.css";
-
-import SPARouter from "@kodnificent/sparouter";
-
+import page from "page";
 import mealRouter from "./pages/meal";
 import homeRouter from "./pages/home";
 import reviewRouter from "./pages/review";
@@ -10,7 +8,6 @@ import reviewRouter from "./pages/review";
 const options = {
   historyMode: true // set this to true if you use the HTML5 history mode API
 };
-const router = new SPARouter(options);
 document.body.innerHTML = `
   <div id="background" class="">
   <!--header start-->
@@ -46,8 +43,8 @@ document.body.innerHTML = `
       </div>
         <div class="backgroudPic">
           <img src="../../../assets/vegan.jpg" alt="background picture">
-          <img src="../../../assets/vegan2.jpg" alt="background picture">
-          <img src="../../../assets/meat.jpg" alt="background picture">
+          <img src="../../../assets/mixed.jpg" alt="background picture">
+          <img src="../../../assets/kitfo.jpg" alt="background picture">
         </div>
       </div>
     </section>
@@ -56,9 +53,24 @@ document.body.innerHTML = `
       <p> Email: zolla-cop@gmail.dk</p>
       <p> Tlf: 40906030</p>
   </footer>`;
-
-router.get("/", homeRouter(req, router));
-router.get("/meals", mealRouter(req, router));
-router.get("/review", reviewRouter(req, router));
-
-router.init();
+const searchInput = document.querySelector('input.searchInput');
+searchInput.addEventListener('keyup',searchMealList(searchInput.value));
+page("/", homeRouter);
+page("/meals", mealRouter);
+page("/review", reviewRouter);
+page.start();
+//router.init();
+//search product lists with searchkey
+async function searchMealList(searchKey){
+  console.log(searchKey);
+  const mealLists = await fetchServer();
+  const searchedList = mealLists.filter((meal) =>{
+    return meal.name.toLowerCase().includes(searchKey.toLowerCase())});
+  console.log(searchedList);
+  return searchedList;
+}
+async function fetchServer(){
+  const res = await fetch(`/api/meals/`);
+  const jsonData = await res.json();
+  return jsonData;
+}
