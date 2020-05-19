@@ -1,5 +1,5 @@
 async function homeRouter(req, router) {
-  getBodyContainer();
+  //getBodyContainer();
   const data = await fetchServer();
   renderHTML(data);
   console.log(`Welcome to my home page! The request url is ${req.url}`);
@@ -44,8 +44,8 @@ function getBodyContainer(){
     />
     <h1 class="logo-h1">ZOLLA RESTURANT</h1>
     <nav class="navbar">
-      <a href="/">Menu</a>
-      <a href="/meal">Reservations</a>
+      <a href="/">Home</a>
+      <a href="/meal">Menu</a>
       <a href="/review">Review</a>
     </nav>
   </header>  <!--header end-->
@@ -55,8 +55,8 @@ function getBodyContainer(){
   <section class="bigContainer">
   <div class="backgroudPic">
   <img src="../../../assets/vegan.jpg" alt="background picture">
-  <img src="../../../assets/vegan2.jpg" alt="background picture">
-  <img src="../../../assets/meat.jpg" alt="background picture">
+  <img src="../../../assets/mixed.jpg" alt="background picture">
+  <img src="../../../assets/kitfo.jpg" alt="background picture">
 </div>
       <h2>All Meals in the database</h2>
       <div class="mealBox">
