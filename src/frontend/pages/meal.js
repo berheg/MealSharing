@@ -24,8 +24,6 @@ async function mealsId(req, router) {
   selectListDiv.style.display = none;
 });
 }
-//mealsId();
-
 async function fetchServer(){
   const res = await fetch(`/api/meals/`);
   const jsonData = await res.json();
@@ -33,29 +31,23 @@ async function fetchServer(){
   console.log(jsonData);
   return jsonData;
 }
-//renders lists of data
 function renderHTML(data){
-  const ulTitle = document.querySelector('ul.mealTitle');
-  const ulList = document.querySelector('ul.mealUl');
-  ulList.innerHTML = "";
-    for(let i=0; i< data.length;i++){
-    const liTag = document.createElement('li');
-    const liDescription = document.createElement('li');
-    const  liLocation = document.createElement('li');
-    liTag.innerHTML = data[i].title;
-    if (i === 0){
-      const liDesc = document.createElement('li');
-      liDesc.innerHTML = 'Description';
-      ulList.appendChild(liDesc);
-    }
-    liDescription.innerHTML = data[i].description;
-    liLocation.innerHTML = data[i].location;
-    ulTitle.appendChild(liTag);
-    ulList.appendChild(liDescription);
-    //ulList.appendChild(liLocation);
+  data.forEach((element) => {
+              const ulTitle = document.querySelector('ul.mealTitle');
+              const ulList = document.querySelector('ul.mealUl');
+              const div = document.createElement('figure');
+              div.innerHTML = ` <div class="card" style="width: 20rem;">
+                                 <div class="card-body">
+                                 <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
+                                 <h5 class="card-title">${element.title}</h5>
+                                 <p class="card-text">${element.description}</p>
+                                 <a href="meal/${element.id}" class="btn btn-primary">Read More</a>
+                                 </div>
+                                 </div>`;
+              ulList.appendChild(div);
+           });
   }
 
-}
 function getBodyContainer(){
   document.body.innerHTML = `
   <div id="background" class="">
@@ -66,7 +58,7 @@ function getBodyContainer(){
     <h1 class="logo-h1">ZOLLA RESTURANT</h1>
     <nav class="navbar">
       <a href="/">Home</a>
-      <a href="/meal">Menu</a>
+      <a href="/meals">Menu</a>
       <a href="/review">Review</a>
     </nav>
   </header>  <!--header end-->
@@ -90,15 +82,10 @@ function getBodyContainer(){
     <div class="searchList">
       <ul class="searchMealList"></ul>
     </div>
-    <div class="backgroudPic">
-      <img src="../../../assets/vegan.jpg" alt="background picture">
-      <img src="../../../assets/mixed.jpg" alt="background picture">
-      <img src="../../../assets/kitfo.jpg" alt="background picture">
+
     </div>
-    </div>    
     <div class="mealBox">
-      <ul  class="mealTitle">
-        <li>Title</li>
+      <ul  class="mealTitle">        
       </ul>
       <ul id="mealList" class="mealUl"></ul>
     </div>
