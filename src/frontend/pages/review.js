@@ -17,7 +17,7 @@ async function review(req, res) {
   await renderHTML(data);
   formBtn.addEventListener('click', formBtnEventHandler)
   //searchBtn.addEventListener('keyup',inputEventHandler);
-  searchInput.addEventListener('keyup',inputEventHandler);
+  searchInput.addEventListener('keyup',searchMealList);
   listSelect.addEventListener('click', () =>searchInput.innerHTML = listSelect.value);
   //search input blur event handler
   searchInput.addEventListener('blur', () =>{
@@ -44,8 +44,8 @@ function getBodyContainer(){
     />
     <h1 class="logo-h1">ZOLLA RESTURANT</h1>
     <nav class="navbar">
-      <a href="/meal">Menu</a>
-      <a href="">Reservations</a>
+      <a href="/">Home</a>
+      <a href="/meals">Menu</a>
       <a href="/review">Review</a>
     </nav>
   </header>  <!--header end-->
@@ -70,9 +70,9 @@ function getBodyContainer(){
             <ul class="searchMealList"></ul>
         </div>
         <div class="backgroudPic">
-            <img src="../assets/background/vegan.jpg" alt="background picture">
-            <img src="../assets/background/vegan2.jpg" alt="background picture">
-            <img src="../assets/background/meat.jpg" alt="background picture">
+            <img src="../../../assets/vegan.jpg" alt="background picture">
+            <img src="../../../assets/mixed.jpg" alt="background picture">
+            <img src="../../../assets/kitfo.jpg" alt="background picture">
         </div>
 
     </div>
