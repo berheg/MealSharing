@@ -45,7 +45,7 @@ function getBodyContainer(){
     <h1 class="logo-h1">ZOLLA RESTURANT</h1>
     <nav class="navbar">
       <a href="/">Home</a>
-      <a href="/meal">Menu</a>
+      <a href="/meals">Menu</a>
       <a href="/review">Review</a>
     </nav>
   </header>  <!--header end-->
