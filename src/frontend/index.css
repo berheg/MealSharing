@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
 * {
   font-family: 'Montserrat', sans-serif;
 }
 header{
   background-color: rgba(181, 62, 143, 0.5);
+  margin-bottom: 50px;
 }
 body{
   text-align: center;
+  width: 100vw;
+  height: auto;
+  margin: 0 auto;
+  background-color: rgb(247, 247, 247);
 }
 aside{
   float:right;
@@ -41,5 +47,159 @@ footer{
   flex-direction: row;
   justify-content: space-around;
   margin-top: 100px;
-  background-color: blue;
+  background-color:  rgb(250, 200, 300);
+  padding-top: 30px;
+}
+header {
+   background-color: rgb(0, 0, 0);
+   width: 100vw;
+   /* height: 80px; */
+   display: flex;
+   align-items: center;
+   /* position: fixed; */
+   top: 0;
+   z-index: 3;
+   /* border-bottom: 5px solid blueviolet; */
+}
+samp {
+   color: rgb(56, 250, 218);
+   font-family: 'Roboto', bold;
+   font-style: bold;
+}
+header ul {
+   display: flex;
+   align-items: center;
+}
+header .menu {
+   width: 90vw;
+   margin: 10px auto;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+header a {
+   font-family: 'Abril Fatface', serif;
+   font-style: bold;
+   font-size: 23px;
+   text-decoration: none;
+   color: rgb(250, 250, 250);
+   margin: 10px 30px 0 0;
+}
+header a:hover {
+   font-style: bold;
+   font-size: 23px;
+   text-decoration: none;
+   color: rgb(56, 250, 218);
+}
+.meal-container {
+   /* width: 70vw; */
+   margin: auto;
+   display: flex;
+   /* flex-direction: row; */
+   flex-wrap: wrap;
+}
+.meal-container > div {
+   border: 0px solid #ddd;
+   padding: 10px;
+   border-radius: 3px;
+   margin-top: 10px;
+   display: flex;
+   /* justify-content: space-between; */
+   /* justify-items: auto; */
+   /* align-items: center; */
+}
+.card-img-top {
+   margin-bottom: 20px;
+}
+.card-title,
+h1 {
+   font-size: 44px;
+   font-family: 'Abril Fatface', serif;
+}
+.section {
+   background-color: #d7eb74;
+   background-image: linear-gradient(90deg, #74ebd5 0%, #9face6 100%);
+   width: 100vw;
+   height: 500px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+.section > div {
+   margin-top: 25px;
+}
+.txt-looking-meal {
+   font-family: 'Abril Fatface', serif;
+   color: white;
+}
+.btn-outline {
+   border: 2px solid rgb(255, 255, 255);
+   color: rgb(252, 252, 252);
+   border-radius: 100px;
+   padding: 5px 30px 5px 30px;
+}
+.btn-outline:hover {
+   background-color: #fad961;
+   background-image: linear-gradient(90deg, #fad961 0%, #f76b1c 100%);
+   color: rgb(255, 255, 255);
+   border: 2px solid rgb(255, 255, 255);
+   transition: ease-in;
+}
+.reservationsForm {
+   margin-top: 50px;
+   width: 50vw;
+   background-color: rgb(247, 247, 247);
+   border: 2px solid rgb(245, 245, 245);
+   border-radius: 5px;
+   padding: 25px;
+}
+span {
+   font-family: 'Roboto', serif;
+   font-weight: bold;
+   font-size: 25px;
+}
+.meal-search {
+   width: 60vw;
+   height: 90vh;
+   position: fixed;
+   background-color: rgba(255, 255, 255, 0.954);
+   z-index: 6;
+   display: none;
+   top: 45px;
+   padding: 30px;
+}
+.resSucces {
+   color: rgb(0, 213, 25);
+   font-size: 14px;
+}
+.resError {
+   color: rgb(213, 21, 0);
+   font-size: 14px;
+}
+.slider_meal {
+   background-color: rgba(255, 255, 255, 0) !important;
+   width: 80vw;
+   margin: 90px auto;
+}
+/* .slider_review {
+   background-color: rgba(202, 26, 26, 0) !important;
+   width: 70vw;
+   margin: 90px auto;
+} */
+figure {
+   padding: 35px;
+}
+.section_add_meal {
+   width: 100vw;
+   height: 50vh;
+   background-color: rgb(252, 252, 252);
+   display: flex;
+   align-items: center;
+}
+.reviewsCart {
+   background-color: rgb(252, 252, 252);
+}
+header{
+  background-color: rgba(181, 62, 143, 0.5);
 }
