@@ -5,6 +5,7 @@ const emailInput = document.querySelector('input.emailInput');
 const guestInput = document.querySelector('input.guestInput');
 const searchInput = document.querySelector('input.searchInput');
 const listSelect = document.querySelector('list.listSelect');
+const selectMealList= document.querySelector('mealLists');
 const h2 = document.querySelector('h2.mealId');
 const h3 = document.querySelector('h3.formHead');
 let id;
@@ -13,8 +14,17 @@ async function review(req, res) {
   getBodyContainer();
   //id = req.params.id;
   //h2.innerHTML += id;
-  const data = await fetchServer(3);
+  const data = await fetchServer(`/api/meals/`);
   await renderHTML(data);
+  const select = document.createElement('select.list-options');
+  data.forEach((element) => {
+    const option = document.createElement('OPTION');
+    option.value=element.title;
+    option.title=element.title;
+    select.appendChild(option);
+  });
+
+  selectMealList.appendChild(select);
   formBtn.addEventListener('click', formBtnEventHandler)
   //searchBtn.addEventListener('keyup',inputEventHandler);
   searchInput.addEventListener('keyup',searchMealList);
@@ -53,6 +63,7 @@ function getBodyContainer(){
         <form action="/api/reviews" class="reviewForm">
             <h3 class="formHead">Fill in The Review Form </h3>
             <label for="name">Review Form</label>
+            <section class = "mealLists"></section>
             <input type="text" class="titleInput" required placeholder="Title">
             <input type="text" class="descriptionInput" required placeholder="Description">
             <input type="number"class="starInput" required placeholder="Star in number">
