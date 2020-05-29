@@ -33,7 +33,6 @@ async function fetchServer(){
 }
 function renderHTML(data){
   data.forEach((element) => {
-              const ulTitle = document.querySelector('ul.mealTitle');
               const ulList = document.querySelector('ul.mealUl');
               const div = document.createElement('figure');
               div.innerHTML = ` <div class="card" style="width: 20rem;">
