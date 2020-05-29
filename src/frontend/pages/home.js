@@ -81,10 +81,38 @@ function getBodyContainer(){
       <h2 class=""></h2>
     </div>
   </section>
-  <footer class="footer">
-      <p>© 2019 Copenhagen</p>
-      <p> Email: zolla-cop@gmail.dk</p>
-      <p> Tlf: 40906030</p>
+  <footer>
+    <!-- Footer main -->
+    <section class="ft-main">
+      <div class="ft-main-item">
+        <h2 class="ft-title">Contact</h2>
+        <ul>
+          <li>Email: zolla-cop@gmail.dk</li>
+          <li>Tlf: 40906030</li>
+          <li></li>
+        </ul>
+      </div>
+    </section>
+    <!-- Footer social -->
+    <section class="ft-social">
+      <ul class="ft-social-list">
+        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fab fa-github"></i></a></li>
+        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+      </ul>
+    </section>
+
+    <!-- Footer legal -->
+    <section class="ft-legal">
+      <ul class="ft-legal-list">
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li>&copy; 2020 Copyright Nowrap Inc.</li>
+      </ul>
+    </section>
   </footer>`;
 
 }
