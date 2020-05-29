@@ -1,9 +1,11 @@
 import _ from 'lodash';
 import "./index.css";
+import "./glider.min.css";
 import page from "page";
 import mealRouter from "./pages/meal";
 import homeRouter from "./pages/home";
 import reviewRouter from "./pages/review";
+import handleMealRequest from "./pages/meals";
 
 const options = {
   historyMode: true // set this to true if you use the HTML5 history mode API
@@ -49,15 +51,45 @@ document.body.innerHTML = `
       </div>
     </section>
   <footer>
-      <p>© 2019 Copenhagen</p>
-      <p> Email: zolla-cop@gmail.dk</p>
-      <p> Tlf: 40906030</p>
+    <!-- Footer main -->
+    <section class="ft-main">
+      <div class="ft-main-item">
+        <h2 class="ft-title">Contact</h2>
+        <ul>
+          <li>Email: zolla-cop@gmail.dk</li>
+          <li>Tlf: 40906030</li>
+          <li></li>
+        </ul>
+      </div>
+    </section>
+    <!-- Footer social -->
+    <section class="ft-social">
+      <ul class="ft-social-list">
+        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fab fa-github"></i></a></li>
+        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+      </ul>
+    </section>
+
+    <!-- Footer legal -->
+    <section class="ft-legal">
+      <ul class="ft-legal-list">
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li>&copy; 2020 Copyright Nowrap Inc.</li>
+      </ul>
+    </section>
   </footer>`;
+   loadReviews();
 const searchInput = document.querySelector('input.searchInput');
 searchInput.addEventListener('keyup',searchMealList(searchInput.value));
 page("/", homeRouter);
 page("/meals", mealRouter);
 page("/review", reviewRouter);
+page("/meal/:id",handleMealRequest);
 page.start();
 //router.init();
 //search product lists with searchkey
@@ -74,3 +106,30 @@ async function fetchServer(){
   const jsonData = await res.json();
   return jsonData;
 }
+function loadReviews() {
+      fetch('/api/reviews')
+         .then((res) => res.json())
+         .then((data) => {
+            const carouselReviews = document.querySelector('.carousel-inner');
+            data.forEach((element) => {
+               // const div = document.createElement('figure');
+               const carouselRev = document.querySelector('.carousel-item');
+               carouselRev.innerHTML = `
+               <div class="media"><img class="rounded-circle img-thumbnail" src="https://source.unsplash.com/400x400?${element.id}" alt="" width="75">
+               <div class="media-body ml-3">
+               <div><h4>${element.name}</h4></div>
+                                        <blockquote class="blockquote border-0 p-0">
+                                            <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>${element.description}</p>
+                                            <footer class="blockquote-footer">Someone famous in
+                                                <cite title="Source Title"> ${element.name}</cite>
+                                            </footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                              `;
+               carouselReviews.appendChild(carouselRev);
+            });
+         });
+      //carouselReviews.innerHTML = '';
+   }
+   //loadMeals();
