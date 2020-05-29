@@ -14,7 +14,7 @@ router.use(bodyParser());
 const addNewMeal = function(meal) {
   const sql = `insert into meal ` +
               `(title, description, location, when, max_reservations, price, created_date) ` +
-              `values('${meal.title}', '${meal.description}', '${meal.location}','${meal.when}',${meal.max_reservations},${meal.price},'${meal.created_date}')` ;     
+              `values('${meal.title}', '${meal.description}', '${meal.location}','${meal.when}',${meal.max_reservations},${meal.price},'${meal.created_date}')` ;
  return sql;
 };
 
@@ -40,9 +40,9 @@ router.get("/", (request, response) => {
     });
   }
   else if(availableReservations!==undefined){
-    const sql = `select meal.id,meal.title, Meal.max_reservations as max_reservations ,` + 
-    `sum(reservation.number_of_guests) as totalGuests from meal` + 
-    ` inner join reservation on reservation.meal_id = meal.id ` + 
+    const sql = `select meal.id,meal.title, Meal.max_reservations as max_reservations ,` +
+    `sum(reservation.number_of_guests) as totalGuests from meal` +
+    ` inner join reservation on reservation.meal_id = meal.id ` +
     `group by meal.id` +
     ` having totalGuests < meal.max_reservations`;
     pool.query(sql, function(err, results, fields) {
@@ -84,7 +84,7 @@ router.get("/", (request, response) => {
       console.log('Data fetched at limit!');
       response.json(results);
     });
-    
+
   }
   else{
     pool.query(sqlFunction.getAllRows('meal'), function(err, results, fields) {
@@ -99,7 +99,7 @@ router.get("/", (request, response) => {
 });
 //add new row in the given table
 router.post("/", (request, response) => {
-  const meal = request.body;  
+  const meal = request.body;
   pool.query(addNewMeal(meal), function(err, results, fields) {
     if(err){
       console.error(err);
@@ -109,14 +109,14 @@ router.post("/", (request, response) => {
   });
 });
 //returns row with the given id and table
-router.get("/:id", (request, response) => {
+router.get("/meal/:id", (request, response) => {
   const mealId = request.params.id;
   pool.query(sqlFunction.getRowById('meal',mealId), function(err, results, fields) {
     if(err){
       console.error(err);
       return;
   }
-    response.json(results);    
+    response.json(results);
   });
 });
 //update row with given id in the given table and properties
@@ -129,18 +129,18 @@ router.put("/:id", (request, response) => {
       console.error(err);
       return;
   }
-    response.send(`The row with id of ${mealId} is updated!`);    
+    response.send(`The row with id of ${mealId} is updated!`);
   });
 });
-//delete row with given id in the given table 
+//delete row with given id in the given table
 router.delete("/:id", (request, response) => {
-  const mealId = request.params.id;  
+  const mealId = request.params.id;
   pool.query(sqlFunction.deleteRowById('meal',mealId), function(err, results, fields) {
     if(err){
       console.error(err);
       return;
-  }    
-    response.send(`The row with id of ${mealId} is successfully deleted!`);    
+  }
+    response.send(`The row with id of ${mealId} is successfully deleted!`);
   });
 });
 //Here goes the router
