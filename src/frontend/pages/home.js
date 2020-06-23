@@ -48,6 +48,13 @@ function getBodyContainer(){
       <a href="/meals">Menu</a>
       <a href="/review">Review</a>
     </nav>
+    <nav class = "container-menu-button">
+      <button type="button" className="buttonClassName" onClick={onClickHandle}>
+        <div className="line-top" />
+        <div className="line-middle" />
+        <div className="line-bottom" />
+      </button>
+    </nav>
   </header>  <!--header end-->
 
   </div>
