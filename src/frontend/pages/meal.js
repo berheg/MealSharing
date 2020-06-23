@@ -35,7 +35,7 @@ function renderHTML(data){
   data.forEach((element) => {
               const ulList = document.querySelector('ul.mealUl');
               const div = document.createElement('figure');
-              div.innerHTML = ` <div class="card" style="width: 20rem;">
+              div.innerHTML = ` <div class="card" style="width: 20rem;" col={6}>
                                  <div class="card-body">
                                  <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
                                  <h5 class="card-title">${element.title}</h5>
@@ -59,6 +59,13 @@ function getBodyContainer(){
     <a href="/">Home</a>
     <a href="/meals">Menu</a>
     <a href="/review">Review</a>
+    </nav>
+    <nav class = "container-menu-button">
+      <button type="button" className="buttonClassName" onClick={onClickHandle}>
+        <div className="line-top" />
+        <div className="line-middle" />
+        <div className="line-bottom" />
+      </button>
     </nav>
   </header>  <!--header end-->
   <aside>
