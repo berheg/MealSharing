@@ -22,6 +22,13 @@ document.body.innerHTML = `
       <a href="/meals">Menu</a>
       <a href="/review">Review</a>
     </nav>
+    <nav class = "container-menu-button">
+      <button type="button" className="buttonClassName" onClick={onClickHandle}>
+        <div className="line-top" />
+        <div className="line-middle" />
+        <div className="line-bottom" />
+      </button>
+    </nav>
   </header>
   <aside>
     <form action="/api/reservations" class="reservationForm">
@@ -44,9 +51,15 @@ document.body.innerHTML = `
         <ul class="searchMealList"></ul>
       </div>
         <div class="backgroudPic">
-          <img src="../../../assets/vegan.jpg" alt="background picture">
-          <img src="../../../assets/mixed.jpg" alt="background picture">
-          <img src="../../../assets/kitfo.jpg" alt="background picture">
+          <div col ={6}>
+          <img  src="../../../assets/vegan.jpg" alt="background picture">
+          </div>
+          <div col ={6}>
+          <img col = {6} src="../../../assets/mixed.jpg" alt="background picture">
+          </div>
+          <div col ={6}>
+          <img col={6} src="../../../assets/kitfo.jpg" alt="background picture">
+        </div>
         </div>
       </div>
     </section>
@@ -133,3 +146,6 @@ function loadReviews() {
       //carouselReviews.innerHTML = '';
    }
    //loadMeals();
+   const onClickHandle = () => {
+     this.classList.toggle('change');
+   };
