@@ -10,12 +10,14 @@
 header{
   background-color: rgba(181, 62, 143, 0.5);
   margin-bottom: 50px;
+  position: fixed;
 }
 body{
   text-align: center;
   width: 100vw;
   height: auto;
   margin: 0 auto;
+  margin-top: 150px;
   background-color: rgb(247, 247, 247);
 }
 aside{
