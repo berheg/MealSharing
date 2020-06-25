@@ -11,6 +11,7 @@
     "build": "webpack --entery-point ./src/frontend/index.js --output ./dist/bundle.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon ./src/backend/index.js",
+    "db:setup": "cd ./src/server/ && knex migrate:latest && knex seed:run",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "reinstall": "npm run delete-nm & rm ./package-lock.json & npm run delete-nm & npm install",
     "delete-nm": "rm -rf node_modules/",
