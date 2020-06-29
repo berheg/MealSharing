@@ -150,7 +150,8 @@ async function formBtnEventHandler(){
 function searchMealList(searchKey){
   console.log(mealLists);
   const searchedList = mealLists.filter((meal) =>{
-    return meal.name.toLowerCase().includes(searchKey.toLowerCase())});
+    const mealSearched=meal.name.toLowerCase();
+    return mealSearched.includes(searchKey.toLowerCase())});
   console.log(searchedList);
   return searchedList;
 }
