@@ -32,13 +32,13 @@ document.body.innerHTML = `
   </header>
   <aside>
     <form action="/api/reservations" class="reservationForm">
-    <h3 class="formH3">Avialable Reservations:</h3>
-    <label for="name">Reservation Form</label>
-    <input type="number"class="phoneInput" required placeholder="Phone Number">
-    <input type="text" class="nameInput" required placeholder="Name">
-    <input type="email" class="emailInput" required placeholder="Email">
-    <input type="number"class="guestInput" required placeholder="Guest Number">
-    <button class="formBtn">Book Seat</button>
+      <h3 class="formH3">Avialable Reservations:</h3>
+      <label for="name">Reservation Form</label>
+      <input type="number"class="phoneInput" required placeholder="Phone Number">
+      <input type="text" class="nameInput" required placeholder="Name">
+      <input type="email" class="emailInput" required placeholder="Email">
+      <input type="number"class="guestInput" required placeholder="Guest Number">
+      <button class="formBtn">Book Seat</button>
     </form>
   </aside>
   <section class="bigContainer">
@@ -50,8 +50,8 @@ document.body.innerHTML = `
       <div class="searchList">
         <ul class="searchMealList"></ul>
       </div>
-        <div class="backgroudPic">
-          <div col ={6}>
+      <div class="backgroudPic">
+        <div col ={6}>
           <img  src="../../../assets/vegan.jpg" alt="background picture">
           </div>
           <div col ={6}>
@@ -60,9 +60,9 @@ document.body.innerHTML = `
           <div col ={6}>
           <img col={6} src="../../../assets/kitfo.jpg" alt="background picture">
         </div>
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
   <footer>
     <!-- Footer main -->
     <section class="ft-main">
@@ -96,7 +96,7 @@ document.body.innerHTML = `
       </ul>
     </section>
   </footer>`;
-   loadReviews();
+   //loadReviews();
 const searchInput = document.querySelector('input.searchInput');
 searchInput.addEventListener('keyup',searchMealList(searchInput.value));
 page("/", homeRouter);
@@ -107,10 +107,12 @@ page.start();
 //router.init();
 //search product lists with searchkey
 async function searchMealList(searchKey){
-  console.log(searchKey);
   const mealLists = await fetchServer();
+  console.log("searchKey= "+searchKey);
+  console.log(mealLists);
   const searchedList = mealLists.filter((meal) =>{
-    return meal.name.toLowerCase().includes(searchKey.toLowerCase())});
+    const mealSearched=meal.title.toLowerCase();
+    return mealSearched.includes(searchKey.toLowerCase())});
   console.log(searchedList);
   return searchedList;
 }
