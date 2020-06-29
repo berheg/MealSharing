@@ -69,15 +69,15 @@ function getBodyContainer(){
     </nav>
   </header>  <!--header end-->
   <aside>
-  <form action="/api/reservations" class="reservationForm">
-  <h3 class="formH3">Avialable Reservations:</h3>
-  <label for="name">Reservation Form</label>
-  <input type="number"class="phoneInput" required placeholder="Phone Number">
-  <input type="text" class="nameInput" required placeholder="Name">
-  <input type="email" class="emailInput" required placeholder="Email">
-  <input type="number"class="guestInput" required placeholder="Guest Number">
-  <button class="formBtn">Book Seat</button>
-</form>
+    <form action="/api/reservations" class="reservationForm">
+      <h3 class="formH3">Avialable Reservations:</h3>
+      <label for="name">Reservation Form</label>
+      <input type="number"class="phoneInput" required placeholder="Phone Number">
+      <input type="text" class="nameInput" required placeholder="Name">
+      <input type="email" class="emailInput" required placeholder="Email">
+      <input type="number"class="guestInput" required placeholder="Guest Number">
+      <button class="formBtn">Book Seat</button>
+    </form>
   </aside>
   <section class="bigContainer">
     <div class="search">
@@ -85,17 +85,15 @@ function getBodyContainer(){
       <button class="searchBtn">Search</button>
     </div>
     <div>
-    <div class="searchList">
-      <ul class="searchMealList"></ul>
-    </div>
-
+      <div class="searchList">
+        <ul class="searchMealList"></ul>
+      </div>
     </div>
     <div class="mealBox">
       <ul  class="mealTitle">
       </ul>
       <ul id="mealList" class="mealUl"></ul>
     </div>
-
   </section>
   <footer>
     <!-- Footer main -->
@@ -120,7 +118,6 @@ function getBodyContainer(){
         <li><a href="#"><i class="fab fa-youtube"></i></a></li>
       </ul>
     </section>
-
     <!-- Footer legal -->
     <section class="ft-legal">
       <ul class="ft-legal-list">
@@ -152,12 +149,13 @@ async function formBtnEventHandler(){
       console.log(err);
     });
   };
-
 //search product lists with searchkey
 function searchMealList(searchKey){
+  console.log("searchKey= "+searchKey);
   console.log(mealLists);
   const searchedList = mealLists.filter((meal) =>{
-    return meal.name.toLowerCase().includes(searchKey.toLowerCase())});
+    const mealSearched=meal.title.toLowerCase();
+    return mealSearched.includes(searchKey.toLowerCase())});
   console.log(searchedList);
   return searchedList;
 }
