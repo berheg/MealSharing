@@ -171,6 +171,30 @@ span {
    top: 45px;
    padding: 30px;
 }
+.backgroudPic{
+  overflow: hidden;
+}
+@keyframes slider {
+  0% {
+    left: 0;
+  }
+  20%{
+    left: 0;
+  }
+  25%{
+    left: 100%;
+  }
+}
+.backgroundPic figure{
+  display: block;
+  position: relative;
+  width: 500%;
+  margin: 0;
+  left: 0;
+  animation: slider 20s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+
 .resSucces {
    color: rgb(0, 213, 25);
    font-size: 14px;
