@@ -1,12 +1,4 @@
-const formBtn = document.querySelector('button.formBtn');
-const phoneInput = document.querySelector('input.phoneInput');
-const nameInput = document.querySelector('input.nameInput');
-const emailInput = document.querySelector('input.emailInput');
-const guestInput = document.querySelector('input.guestInput');
-const searchInput = document.querySelector('input.searchInput');
-const listSelect = document.querySelector('list.listSelect');
-const h2 = document.querySelector('h2.mealId');
-const h3 = document.querySelector('h3.formH3');
+
 let id;
 async function mealsId(req, router) {
   getBodyContainer();
@@ -14,15 +6,19 @@ async function mealsId(req, router) {
   //h2.innerHTML += id;
   const data = await fetchServer();
   await renderHTML(data);
-  formBtn.addEventListener('click', formBtnEventHandler)
-  searchBtn.addEventListener('keyup',inputEventHandler);
-  searchInput.addEventListener('keyup',searchMealList(searchInput.value));
-  listSelect.addEventListener('click', () =>searchInput.innerHTML = listSelect.value);
-  //search input blur event handler
-  searchInput.addEventListener('blur', () =>{
-  searchInput.value = '';
-  selectListDiv.style.display = none;
-});
+  const formBtn = document.querySelector('button.formBtn');
+  const phoneInput = document.querySelector('input.phoneInput');
+  const nameInput = document.querySelector('input.nameInput');
+  const emailInput = document.querySelector('input.emailInput');
+  const guestInput = document.querySelector('input.guestInput');
+  const searchInput = document.querySelector('input.searchInput');
+  const listSelect = document.querySelector('list.listSelect');
+  const h2 = document.querySelector('h2.mealId');
+  const h3 = document.querySelector('h3.formH3');
+
+  formBtn.addEventListener('click', formBtnEventHandler);
+  searchInput.addEventListener('keyup',()=>searchMealList(searchInput.value, data));
+
 }
 async function fetchServer(){
   const res = await fetch(`/api/meals/`);
@@ -32,8 +28,9 @@ async function fetchServer(){
   return jsonData;
 }
 function renderHTML(data){
+  const ulList = document.querySelector('ul.mealUl');
+  ulList.innerHTML='';
   data.forEach((element) => {
-              const ulList = document.querySelector('ul.mealUl');
               const div = document.createElement('figure');
               div.innerHTML = ` <div class="card" style="width: 20rem;" col={6}>
                                  <div class="card-body">
@@ -150,13 +147,14 @@ async function formBtnEventHandler(){
     });
   };
 //search product lists with searchkey
-function searchMealList(searchKey){
+function searchMealList(searchKey, mealLists){
   console.log("searchKey= "+searchKey);
   console.log(mealLists);
   const searchedList = mealLists.filter((meal) =>{
     const mealSearched=meal.title.toLowerCase();
-    return mealSearched.includes(searchKey.toLowerCase())});
+    return mealSearched.includes(searchKey.toLowerCase());
+  });
   console.log(searchedList);
-  return searchedList;
+  renderHTML(searchedList);
 }
 export default mealsId;
