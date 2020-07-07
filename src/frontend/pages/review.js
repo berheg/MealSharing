@@ -1,50 +1,50 @@
-const formBtn = document.querySelector('button.formBtn');
-const phoneInput = document.querySelector('input.phoneInput');
-const nameInput = document.querySelector('input.nameInput');
-const emailInput = document.querySelector('input.emailInput');
-const guestInput = document.querySelector('input.guestInput');
-const searchInput = document.querySelector('input.searchInput');
-const listSelect = document.querySelector('list.listSelect');
-const selectMealList= document.querySelector('mealLists');
-const h2 = document.querySelector('h2.mealId');
-const h3 = document.querySelector('h3.formHead');
+
 let id;
 async function review(req, res) {
   //console.log(req.param.id);
   getBodyContainer();
   //id = req.params.id;
   //h2.innerHTML += id;
-  const data = await fetchServer(`/api/meals/`);
+  const data = await fetchServer();
   await renderHTML(data);
-  const select = document.createElement('select.list-options');
-  data.forEach((element) => {
-    const option = document.createElement('OPTION');
-    option.value=element.title;
-    option.title=element.title;
-    select.appendChild(option);
-  });
-
-  selectMealList.appendChild(select);
-  formBtn.addEventListener('click', formBtnEventHandler)
-  //searchBtn.addEventListener('keyup',inputEventHandler);
-  searchInput.addEventListener('keyup',searchMealList);
-  listSelect.addEventListener('click', () =>searchInput.innerHTML = listSelect.value);
-  //search input blur event handler
-  searchInput.addEventListener('blur', () =>{
-  searchInput.value = '';
-  selectListDiv.style.zIndex = -2;
-});
+  const formBtn = document.querySelector('button.formBtn');
+  const phoneInput = document.querySelector('input.phoneInput');
+  const nameInput = document.querySelector('input.nameInput');
+  const emailInput = document.querySelector('input.emailInput');
+  const guestInput = document.querySelector('input.guestInput');
+  const searchInput = document.querySelector('input.searchInput');
+  const listSelect = document.querySelector('list.listSelect');
+  const selectMealList= document.querySelector('mealLists');
+  const h2 = document.querySelector('h2.mealId');
+  const h3 = document.querySelector('h3.formHead');
+  formBtn.addEventListener('click', formBtnEventHandler);
+  searchInput.addEventListener('keyup',()=>searchMealList(searchInput.value, data));
 }
 //review();
 
-async function fetchServer(id){
-  const res = await fetch(`/api/meals/${id}`);
+async function fetchServer(){
+  const res = await fetch(`/api/meals/`);
   const jsonData = await res.json();
   console.log(jsonData[0]);
   console.log(jsonData);
   return jsonData;
 }
-
+function renderHTML(data){
+  const ulList = document.querySelector('ul.mealUl');
+  ulList.innerHTML='';
+  data.forEach((element) => {
+              const div = document.createElement('figure');
+              div.innerHTML = ` <div class="card" style="width: 20rem;" col={6}>
+                                 <div class="card-body">
+                                 <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
+                                 <h5 class="card-title">${element.title}</h5>
+                                 <p class="card-text">${element.description}</p>
+                                 <a href="meal/${element.id}" class="btn btn-primary">Read More</a>
+                                 </div>
+                                 </div>`;
+              ulList.appendChild(div);
+           });
+  }
 function getBodyContainer(){
   document.body.innerHTML = `
   <div id="background" class="">
@@ -87,7 +87,11 @@ function getBodyContainer(){
         </div>
 
     </div>
-
+    <div class="mealBox">
+      <ul  class="mealTitle">
+      </ul>
+      <ul id="mealList" class="mealUl"></ul>
+    </div>
 
   </section>
   <footer>
@@ -147,12 +151,12 @@ async function formBtnEventHandler(){
   };
 
 //search product lists with searchkey
-function searchMealList(searchKey){
+function searchMealList(searchKey, mealLists){
   console.log(mealLists);
   const searchedList = mealLists.filter((meal) =>{
     const mealSearched=meal.name.toLowerCase();
     return mealSearched.includes(searchKey.toLowerCase())});
   console.log(searchedList);
-  return searchedList;
+  renderHTML(searchedList);
 }
   export default review;
