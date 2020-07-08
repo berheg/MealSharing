@@ -14,7 +14,7 @@ homeRouter();
 page("/home", homeRouter);
 page("/meals", mealRouter);
 page("/review", reviewRouter);
-page("/meal/:id",handleMealRequest);
+page("/meal/:id",(req)=>handleMealRequest(req.params));
 page.start();
 //router.init();
 //search product lists with searchkey
