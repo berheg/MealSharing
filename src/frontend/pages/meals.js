@@ -1,492 +1,340 @@
-window.handleMealRequest = (params) => {
-
-   fetch(`/api/meals/${params.id}`)
-
+function handleMealRequest(params){
+   fetch(`/api/meals/meal/${params.id}`)
       .then((res) => res.json())
-
       .then((data) => {
-
          document.body.innerHTML = `
-
  <header>
-
     <div class="menu">
-
+    <img class="logo" src="favicon.ico" alt="Logo of the company"
+    />
         <div class="logo">
-
             <a href="/" data-navigo>
-
-                <h1>mealinfo
-
-                    <samp>:</samp>
-
-                </h1>
-
+            <h1 class="logo-h1">ZOLLA RESTURANT</h1>
             </a>
-
-        </div>
-
-        <div>
-
-            <ul>
-
-                <a href="/" data-navigo>Home</a>
-
-                <a href="meals" data-navigo>Meals</a>
-
-            </ul>
-
-        </div>
-
-    </div>
-
-</header>
-
-<div class='container' style="height:100%">
-
-    <div class=" col-lg-12">
-
-        <div class="row">
-
-            <div class="col">
-
-                <h1 class="display-1"> ${data[0].title}</h1>
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-lg-5">
-
-                    <img src="https://source.unsplash.com/450x300?${data[0].title}" alt="${data[0].title}" />
-
-                </div>
-
-                <div class="col-lg-4 meal-desciption">
-
-                    <h2>ABOUT THIS MEAL</h2>
-
-                    <p>
-
-                        <span></span>${data[0].description}
-
-                    </p>
-
-                    <p>
-
+          </div>
+          <div>
+              <ul>
+                  <a href="/home" data-navigo>Home</a>
+                  <a href="/meals" data-navigo>Meals</a>
+              </ul>
+          </div>
+      </div>
+  </header>
+  <div class='container' style="height:100%">
+      <div class=" col-lg-12">
+          <div class="row">
+              <div class="col">
+                  <h1 class="display-1"> ${data[0].title}</h1>
+              </div>
+              <div class="row">
+                  <div class="col-lg-5">
+                      <img src="../../../assets/${data[0].title}.jpg" alt="${data[0].title}" />
+                  </div>
+                  <div class="col-lg-4 meal-desciption">
+                      <h2>ABOUT THIS MEAL</h2>
+                      <p>
+                          <span></span>${data[0].description}
+                      </p>
+                      <p>
                         <span>
-
-                        <i class="fa fa-map-marker"></i>
-
+                          <i class="fa fa-map-marker"></i>
                         </span> ${data[0].location}
-
-                    </p>
-
-                    <p>
-
+                      </p>
+                      <p>
                         <span>
+                          Price:
+                          </span> ${data[0].price} Kr
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div id="accordion" class="col p-4 mt-12" >
+          <div class="card">
+              <div class="card-header">
+                  <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                      <h4 class="reservationTitle">Add a review for ${data[0].title} meals </h4>
+                  </a>
+              </div>
+              <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                  <div class="card-body">
+                      <form id="newMeal" class="reviewsForm text-center border border-light p-2 " action="#!" >
+                          <!-- Title -->
+                          <div class="form-row mb-4">
+                              <div class="col">
+                                  <!-- Last name -->
+                                  <input type="text" name="name" id="defaultRegisterFormName" class="form-control" placeholder="Name">
+                              </div>
+                              <div class="col">
+                                  <!-- Stars -->
+                                  <input type="text" name="stars" id="defaultRegisterFormStars" class="form-control" placeholder="Stars">
+                              </div>
+                          </div>
+                          <!-- Description -->
+                          <div class="form-group mt-4">
+                            <!--  <label for="quickReplyFormComment">Your comment</label>-->
+                              <textarea class="form-control comment" name="comment" id="quickReplyFormComment" rows="5">Your comment.. </textarea>
 
-                        Price:
+                              <div class="text-center my-4">
 
-                        </span> ${data[0].price} Kr
+                                  <button class="btn px-4 btn-info btn-lg" type="submit">Post</button>
 
-                    </p>
+                              </div>
 
-                </div>
+                          </div>
 
-            </div>
+                          <p class="resSucces"></p>
 
-        </div>
+                          <p class="resError"></p>
 
-    </div>
+                      </form>
 
-    <div id="accordion" class="col p-4 mt-12" >
+                  </div>
 
-        <div class="card">
+              </div>
 
-            <div class="card-header">
+          </div>
 
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+          <div class="card">
 
-                    <h4 class="reservationTitle">Add a review for ${data[0].title} meals </h4>
+              <div class="card-header">
 
-                </a>
+                  <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
 
-            </div>
+                      <h4 class="reservationTitle">Place an order for a ${data[0].title} meal </h4>
 
-            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                  </a>
 
-                <div class="card-body">
+              </div>
 
-                    <form id="newMeal" class="reviewsForm text-center border border-light p-2 " action="#!" >
+              <div id="collapseThree" class="collapse" data-parent="#accordion">
 
-                        <!-- Title -->
+                  <div class="card-body">
 
-                        <div class="form-row mb-4">
+                      <form class="reservationsForm">
 
-                            <div class="col">
+                          <div class="form-row">
 
-                                <!-- Last name -->
+                              <div class="col">
 
-                                <input type="text" name="name" id="defaultRegisterFormName" class="form-control" placeholder="Name">
+                                  <input type="text" class="form-control" name="name" placeholder="Name">
 
-                            </div>
+                              </div>
 
-                            <div class="col">
+                              <div class="col">
 
-                                <!-- Stars -->
+                                  <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
 
-                                <input type="text" name="stars" id="defaultRegisterFormStars" class="form-control" placeholder="Stars">
+                              </div>
 
-                            </div>
+                              <div class="col">
 
-                        </div>
+                                  <input type="text" class="form-control" name="phone" placeholder="Phone">
 
-                        <!-- Description -->
+                              </div>
 
-                        <div class="form-group mt-4">
+                              <button type="submit" class="btn btn-primary">CONFIRM</button>
 
-                          <!--  <label for="quickReplyFormComment">Your comment</label>-->
+                          </div>
 
-                            <textarea class="form-control comment" name="comment" id="quickReplyFormComment" rows="5">Your comment.. </textarea>
+                          <div class="resSucces reservationMessage"> </div>
 
-                            <div class="text-center my-4">
+                          <div class="resError reservationMessage"> </div>
 
-                                <button class="btn px-4 btn-info btn-lg" type="submit">Post</button>
+                      </form>
 
-                            </div>
+                  </div>
 
-                        </div>
+              </div>
 
-                        <p class="resSucces"></p>
+          </div>
 
-                        <p class="resError"></p>
+      </div>
 
-                    </form>
+  </div>
 
-                </div>
+  <footer>
+    <!-- Footer main -->
+    <section class="ft-main">
+      <div class="ft-main-item">
+        <h2 class="ft-title">Contact</h2>
+        <ul>
+          <li>Email: zolla-cop@gmail.dk</li>
+          <li>Tlf: 40906030</li>
+          <li></li>
+        </ul>
+      </div>
+    </section>
+    <!-- Footer social -->
+    <section class="ft-social">
+      <ul class="ft-social-list">
+        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fab fa-github"></i></a></li>
+        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+      </ul>
+    </section>
+    <!-- Footer legal -->
+    <section class="ft-legal">
+      <ul class="ft-legal-list">
+        <li><a href="#">Terms &amp; Conditions</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li>&copy; 2020 Copyright Nowrap Inc.</li>
+      </ul>
+    </section>
+  </footer>`;
+  const reservationsForm = document.querySelector('.reservationsForm');
+           reservationsForm.addEventListener('submit', (e) => {
+              e.preventDefault();
+              let form = e.target;
+              let nameInput = form.elements.name;
+              let emailInput = form.elements.email;
+              let phoneInput = form.elements.phone;
+              let insertData = {
+                 name: nameInput.value,
+                 email: emailInput.value,
+                 phone: phoneInput.value,
+                 meal_id: params.id
+              };
+              console.log(insertData);
+              const message = document.querySelector('.resSucces');
 
-            </div>
+              const message2 = document.querySelector('.resError');
 
-        </div>
+              if (
 
-        <div class="card">
+                 nameInput.value !== '' &&
 
-            <div class="card-header">
+                 phoneInput.value !== '' &&
 
-                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                 emailInput.value !== ''
 
-                    <h4 class="reservationTitle">Place an order for a ${data[0].title} meal </h4>
+              ) {
 
-                </a>
+                 fetch('/api/reservations', {
 
-            </div>
+                    method: 'POST',
 
-            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    headers: { 'Content-Type': 'application/json' },
 
-                <div class="card-body">
+                    body: JSON.stringify(insertData)
 
-                    <form class="reservationsForm">
+                 })
 
-                        <div class="form-row">
+                    .then((response) => {
 
-                            <div class="col">
+                       response.json();
 
-                                <input type="text" class="form-control" name="name" placeholder="Name">
+                    })
 
-                            </div>
+                    .then((data) => {
 
-                            <div class="col">
+                       message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
 
-                                <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
+                    });
 
-                            </div>
+              } else if (
 
-                            <div class="col">
+                 nameInput.value == '' ||
 
-                                <input type="text" class="form-control" name="phone" placeholder="Phone">
+                 phoneInput.value == '' ||
 
-                            </div>
+                 emailInput.value == ''
 
-                            <button type="submit" class="btn btn-primary">CONFIRM</button>
+              ) {
+                 message2.innerHTML = `Please, fill correctly the form.`;
+              }
+           });
 
-                        </div>
+           const reviewsForm = document.querySelector('.reviewsForm');
 
-                        <div class="resSucces reservationMessage"> </div>
 
-                        <div class="resError reservationMessage"> </div>
 
-                    </form>
+           reviewsForm.addEventListener('submit', (e) => {
 
-                </div>
+              e.preventDefault();
 
-            </div>
+              let form = e.target;
 
-        </div>
+              let nameInput = form.elements.name;
 
-    </div>
+              let starsInput = form.elements.stars;
 
-</div>
+              let commentInput = form.elements.comment;
 
-<footer id="footer">
+              let insertData = {
 
-    <div class="footer-container">
+                 name: nameInput.value,
 
-        <div class="social-icons">
+                 stars: starsInput.value,
 
-            <ul>
+                 description: commentInput.value,
 
-                <li>
+                 meal_id: params.id
 
-                    <a href="https://www.facebook.com/ghofranebh90" class="social-icon">
+              };
 
-                    <i class="fa fa-facebook"></i>
+              console.log(insertData);
 
-                    </a>
+              const message = document.querySelector('.resSucces');
 
-                </li>
+              const message2 = document.querySelector('.resError');
 
-                <li>
+              if (
 
-                    <a href="" class="social-icon">
+                 nameInput.value !== '' &&
 
-                    <i class="fa fa-instagram"></i>
+                 starsInput.value !== '' &&
 
-                    </a>
+                 commentInput.value !== ''
 
-                </li>
+              ) {
 
-                <li>
+                 fetch('/api/reviews', {
 
-                    <a href="https://www.behance.net/Ghofranebh" class="social-icon">
+                    method: 'POST',
 
-                    <i class="fa fa-behance"></i>
+                    headers: { 'Content-Type': 'application/json' },
 
-                    </a>
+                    body: JSON.stringify(insertData)
 
-                </li>
+                 })
 
-                <li>
+                    .then((response) => {
 
-                    <a href="https://www.linkedin.com/in/ghofranebenhmaid/" class="social-icon">
+                       response.json();
 
-                    <i class="fa fa-linkedin"></i>
+                    })
 
-                    </a>
+                    .then((data) => {
 
-                </li>
+                       message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
 
-                <li>
+                    });
 
-                    <a href="https://dribbble.com/Ghofrane" class="social-icon">
+              } else if (
 
-                    <i class="fa fa-dribbble"></i>
+                 nameInput.value == '' ||
 
-                    </a>
+                 starsInput.value == '' ||
 
-                </li>
+                 commentInput.value == ''
 
-                <li>
+              ) {
 
-                    <a href="https://github.com/benhmaid" class="social-icon">
+                 message2.innerHTML = `Please, fill correctly the form.`;
 
-                    <i class="fa fa-github"></i>
+              }
 
-                    </a>
+           });
 
-                </li>
+        });
 
-            </ul>
 
-        </div>
 
-        <hr class="line" />
+     //router.updatePageLinks();
 
-        <div>
-
-            <h4>&copy; 2020 Ghofrane Ben Hmaid</h4>
-
-        </div>
-
-    </div>
-
-</footer>
-
-		 `;
-
-
-
-         const reservationsForm = document.querySelector('.reservationsForm');
-
-
-
-         reservationsForm.addEventListener('submit', (e) => {
-
-            e.preventDefault();
-
-            let form = e.target;
-
-            let nameInput = form.elements.name;
-
-            let emailInput = form.elements.email;
-
-            let phoneInput = form.elements.phone;
-
-            let insertData = {
-
-               name: nameInput.value,
-
-               email: emailInput.value,
-
-               phone: phoneInput.value,
-
-               meal_id: params.id
-
-            };
-
-            console.log(insertData);
-
-            const message = document.querySelector('.resSucces');
-
-            const message2 = document.querySelector('.resError');
-
-            if (
-
-               nameInput.value !== '' &&
-
-               phoneInput.value !== '' &&
-
-               emailInput.value !== ''
-
-            ) {
-
-               fetch('/api/reservations', {
-
-                  method: 'POST',
-
-                  headers: { 'Content-Type': 'application/json' },
-
-                  body: JSON.stringify(insertData)
-
-               })
-
-                  .then((response) => {
-
-                     response.json();
-
-                  })
-
-                  .then((data) => {
-
-                     message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
-
-                  });
-
-            } else if (
-
-               nameInput.value == '' ||
-
-               phoneInput.value == '' ||
-
-               emailInput.value == ''
-
-            ) {
-
-               message2.innerHTML = `Please, fill correctly the form.`;
-
-            }
-
-         });
-
-
-
-         const reviewsForm = document.querySelector('.reviewsForm');
-
-
-
-         reviewsForm.addEventListener('submit', (e) => {
-
-            e.preventDefault();
-
-            let form = e.target;
-
-            let nameInput = form.elements.name;
-
-            let starsInput = form.elements.stars;
-
-            let commentInput = form.elements.comment;
-
-            let insertData = {
-
-               name: nameInput.value,
-
-               stars: starsInput.value,
-
-               description: commentInput.value,
-
-               meal_id: params.id
-
-            };
-
-            console.log(insertData);
-
-            const message = document.querySelector('.resSucces');
-
-            const message2 = document.querySelector('.resError');
-
-            if (
-
-               nameInput.value !== '' &&
-
-               starsInput.value !== '' &&
-
-               commentInput.value !== ''
-
-            ) {
-
-               fetch('/api/reviews', {
-
-                  method: 'POST',
-
-                  headers: { 'Content-Type': 'application/json' },
-
-                  body: JSON.stringify(insertData)
-
-               })
-
-                  .then((response) => {
-
-                     response.json();
-
-                  })
-
-                  .then((data) => {
-
-                     message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
-
-                  });
-
-            } else if (
-
-               nameInput.value == '' ||
-
-               starsInput.value == '' ||
-
-               commentInput.value == ''
-
-            ) {
-
-               message2.innerHTML = `Please, fill correctly the form.`;
-
-            }
-
-         });
-
-      });
-
-
-
-   //router.updatePageLinks();
-
-};
-export default handleMealRequest;
+  };
+  export default handleMealRequest;
