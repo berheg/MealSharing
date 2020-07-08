@@ -14,13 +14,9 @@ async function homeRouter(req, router) {
   const h2 = document.querySelector('h2.mealId');
   const h3 = document.querySelector('h3.formH3');
   let id;
-  formBtn.addEventListener('click', searchMealList(searchInput.value));
-  searchInput.addEventListener('keyup',searchMealList(searchInput.value));
-  //search input blur event handler
-  //searchInput.addEventListener('blur', () =>{
-    //searchInput.value = '';
-    //selectListDiv.style.display = none;
-  //});
+  formBtn.addEventListener('click', searchMealList(searchInput.value, data));
+  searchInput.addEventListener('keyup',()=>searchMealList(searchInput.value, data));
+
 }
 //mealsId();
 
@@ -31,6 +27,22 @@ async function fetchServer(){
   return jsonData;
 }
 //renders lists of data
+function renderHTML(data){
+  const ulList = document.querySelector('ul.mealUl');
+  ulList.innerHTML='';
+  data.forEach((element) => {
+              const div = document.createElement('figure');
+              div.innerHTML = ` <div class="card" style="width: 20rem;" col={6}>
+                                 <div class="card-body">
+                                 <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
+                                 <h5 class="card-title">${element.title}</h5>
+                                 <p class="card-text">${element.description}</p>
+                                 <a href="meal/${element.id}" class="btn btn-primary">Read More</a>
+                                 </div>
+                                 </div>`;
+              ulList.appendChild(div);
+           });
+  }
 
 function getBodyContainer(){
   document.body.innerHTML = `
@@ -80,6 +92,7 @@ function getBodyContainer(){
             <img  src="../../../assets/kitfo.jpg" alt="background picture">
           </figure>
         </div>
+        <ul id="mealList" class="mealUl"></ul>
       </div>
     </section>
     <footer>
@@ -117,14 +130,14 @@ function getBodyContainer(){
     </footer>`;
 
 }
-async function searchMealList(searchKey){
-  const mealLists = await fetchServer();
+function searchMealList(searchKey, mealLists){
   console.log("searchKey= "+searchKey);
   console.log(mealLists);
   const searchedList = mealLists.filter((meal) =>{
     const mealSearched=meal.title.toLowerCase();
-    return mealSearched.includes(searchKey.toLowerCase())});
+    return mealSearched.includes(searchKey.toLowerCase());
+  });
   console.log(searchedList);
-  return searchedList;
+  renderHTML(searchedList);
 }
 export default homeRouter;
