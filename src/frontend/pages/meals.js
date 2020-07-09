@@ -52,46 +52,21 @@ function handleMealRequest(params){
       <div id="accordion" class="col p-4 mt-12" >
           <div class="card">
               <div class="card-header">
-                  <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                  <button class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
                       <h4 class="reservationTitle">Add a review for ${data[0].title} meals </h4>
-                  </a>
+                  </button>
               </div>
-              <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                  <div class="card-body">
-                      <form id="newMeal" class="reviewsForm text-center border border-light p-2 " action="#!" >
-                          <!-- Title -->
-                          <div class="form-row mb-4">
-                              <div class="col">
-                                  <!-- Last name -->
-                                  <input type="text" name="name" id="defaultRegisterFormName" class="form-control" placeholder="Name">
-                              </div>
-                              <div class="col">
-                                  <!-- Stars -->
-                                  <input type="text" name="stars" id="defaultRegisterFormStars" class="form-control" placeholder="Stars">
-                              </div>
-                          </div>
-                          <!-- Description -->
-                          <div class="form-group mt-4">
-                            <!--  <label for="quickReplyFormComment">Your comment</label>-->
-                              <textarea class="form-control comment" name="comment" id="quickReplyFormComment" rows="5">Your comment.. </textarea>
-
-                              <div class="text-center my-4">
-
-                                  <button class="btn px-4 btn-info btn-lg" type="submit">Post</button>
-
-                              </div>
-
-                          </div>
-
-                          <p class="resSucces"></p>
-
-                          <p class="resError"></p>
-
-                      </form>
-
-                  </div>
-
-              </div>
+              <aside>
+                    <form action="/api/reviews" class="reviewForm">
+                        <h3 class="formHead">Fill in The Review Form </h3>
+                        <label for="name">Review Form</label>
+                        <section class = "mealLists"></section>
+                        <input type="text" class="titleInput" required placeholder="Title" name='title'>
+                        <input type="text" class="descriptionInput" required placeholder="Description" name='description'>
+                        <input type="number"class="starInput" required placeholder="Star in number" name='stars'>
+                        <button class="reviewFormBtn">Submit</button>
+                    </form>
+                </aside>
 
           </div>
 
@@ -99,53 +74,25 @@ function handleMealRequest(params){
 
               <div class="card-header">
 
-                  <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                  <button class="reservation-button" data-toggle="collapse" href="#collapseThree">
 
                       <h4 class="reservationTitle">Place an order for a ${data[0].title} meal </h4>
 
-                  </a>
+                  </button>
 
               </div>
 
-              <div id="collapseThree" class="collapse" data-parent="#accordion">
-
-                  <div class="card-body">
-
-                      <form class="reservationsForm">
-
-                          <div class="form-row">
-
-                              <div class="col">
-
-                                  <input type="text" class="form-control" name="name" placeholder="Name">
-
-                              </div>
-
-                              <div class="col">
-
-                                  <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
-
-                              </div>
-
-                              <div class="col">
-
-                                  <input type="text" class="form-control" name="phone" placeholder="Phone">
-
-                              </div>
-
-                              <button type="submit" class="btn btn-primary">CONFIRM</button>
-
-                          </div>
-
-                          <div class="resSucces reservationMessage"> </div>
-
-                          <div class="resError reservationMessage"> </div>
-
-                      </form>
-
-                  </div>
-
-              </div>
+              <aside>
+                <form action="/api/reservations" class="reservationForm">
+                  <h3 class="formH3">Avialable Reservations:</h3>
+                  <label for="name">Reservation Form</label>
+                  <input type="number"class="phoneInput" required placeholder="Phone Number">
+                  <input type="text" class="nameInput" required placeholder="Name">
+                  <input type="email" class="emailInput" required placeholder="Email">
+                  <input type="number"class="guestInput" required placeholder="Guest Number">
+                  <button class="formBtn">Book Seat</button>
+                </form>
+              </aside>
 
           </div>
 
@@ -185,150 +132,159 @@ function handleMealRequest(params){
       </ul>
     </section>
   </footer>`;
-  const reservationsForm = document.querySelector('.reservationsForm');
-           reservationsForm.addEventListener('submit', (e) => {
-              e.preventDefault();
-              let form = e.target;
-              let nameInput = form.elements.name;
-              let emailInput = form.elements.email;
-              let phoneInput = form.elements.phone;
-              let insertData = {
-                 name: nameInput.value,
-                 email: emailInput.value,
-                 phone: phoneInput.value,
-                 meal_id: params.id
-              };
-              console.log(insertData);
-              const message = document.querySelector('.resSucces');
-
-              const message2 = document.querySelector('.resError');
-
-              if (
-
-                 nameInput.value !== '' &&
-
-                 phoneInput.value !== '' &&
-
-                 emailInput.value !== ''
-
-              ) {
-
-                 fetch('/api/reservations', {
-
-                    method: 'POST',
-
-                    headers: { 'Content-Type': 'application/json' },
-
-                    body: JSON.stringify(insertData)
-
-                 })
-
-                    .then((response) => {
-
-                       response.json();
-
-                    })
-
-                    .then((data) => {
-
-                       message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
-
-                    });
-
-              } else if (
-
-                 nameInput.value == '' ||
-
-                 phoneInput.value == '' ||
-
-                 emailInput.value == ''
-
-              ) {
-                 message2.innerHTML = `Please, fill correctly the form.`;
-              }
-           });
-
-           const reviewsForm = document.querySelector('.reviewsForm');
-
-
-
-           reviewsForm.addEventListener('submit', (e) => {
-
-              e.preventDefault();
-
-              let form = e.target;
-
-              let nameInput = form.elements.name;
-
-              let starsInput = form.elements.stars;
-
-              let commentInput = form.elements.comment;
-
-              let insertData = {
-
-                 name: nameInput.value,
-
-                 stars: starsInput.value,
-
-                 description: commentInput.value,
-
-                 meal_id: params.id
-
-              };
-
-              console.log(insertData);
-
-              const message = document.querySelector('.resSucces');
-
-              const message2 = document.querySelector('.resError');
-
-              if (
-
-                 nameInput.value !== '' &&
-
-                 starsInput.value !== '' &&
-
-                 commentInput.value !== ''
-
-              ) {
-
-                 fetch('/api/reviews', {
-
-                    method: 'POST',
-
-                    headers: { 'Content-Type': 'application/json' },
-
-                    body: JSON.stringify(insertData)
-
-                 })
-
-                    .then((response) => {
-
-                       response.json();
-
-                    })
-
-                    .then((data) => {
-
-                       message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
-
-                    });
-
-              } else if (
-
-                 nameInput.value == '' ||
-
-                 starsInput.value == '' ||
-
-                 commentInput.value == ''
-
-              ) {
-
-                 message2.innerHTML = `Please, fill correctly the form.`;
-
-              }
-
-           });
+  const reviewFormBtn = document.querySelector('button.reviewFormBtn');
+  reviewFormBtn.addEventListener('click', ()=>{
+    reviewFormBtnEventHandler(params);
+  } );
+  const reservationButton = document.querySelector('button.reservation-button');
+  reservationButton.addEventListener('click',()=>{
+    const reservationForm = document.querySelector('.reservationForm');
+    reservationForm.style.display='flex';
+  });
+  //const reservationsForm = document.querySelector('.reservationsForm');
+           // reservationsForm.addEventListener('submit', (e) => {
+           //    e.preventDefault();
+           //    let form = e.target;
+           //    let nameInput = form.elements.name;
+           //    let emailInput = form.elements.email;
+           //    let phoneInput = form.elements.phone;
+           //    let insertData = {
+           //       name: nameInput.value,
+           //       email: emailInput.value,
+           //       phone: phoneInput.value,
+           //       meal_id: params.id
+           //    };
+           //    console.log(insertData);
+           //    const message = document.querySelector('.resSucces');
+           //
+           //    const message2 = document.querySelector('.resError');
+           //
+           //    if (
+           //
+           //       nameInput.value !== '' &&
+           //
+           //       phoneInput.value !== '' &&
+           //
+           //       emailInput.value !== ''
+           //
+           //    ) {
+           //
+           //       fetch('/api/reservations', {
+           //
+           //          method: 'POST',
+           //
+           //          headers: { 'Content-Type': 'application/json' },
+           //
+           //          body: JSON.stringify(insertData)
+           //
+           //       })
+           //
+           //          .then((response) => {
+           //
+           //             response.json();
+           //
+           //          })
+           //
+           //          .then((data) => {
+           //
+           //             message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
+           //
+           //          });
+           //
+           //    } else if (
+           //
+           //       nameInput.value == '' ||
+           //
+           //       phoneInput.value == '' ||
+           //
+           //       emailInput.value == ''
+           //
+           //    ) {
+           //       message2.innerHTML = `Please, fill correctly the form.`;
+           //    }
+           // });
+
+           // const reviewsForm = document.querySelector('.reviewsForm');
+           //
+           //
+           //
+           // reviewsForm.addEventListener('submit', (e) => {
+           //
+           //    e.preventDefault();
+           //
+           //    let form = e.target;
+           //
+           //    let nameInput = form.elements.name;
+           //
+           //    let starsInput = form.elements.stars;
+           //
+           //    let commentInput = form.elements.comment;
+           //
+           //    let insertData = {
+           //
+           //       name: nameInput.value,
+           //
+           //       stars: starsInput.value,
+           //
+           //       description: commentInput.value,
+           //
+           //       meal_id: params.id
+           //
+           //    };
+           //
+           //    console.log(insertData);
+           //
+           //    const message = document.querySelector('.resSucces');
+           //
+           //    const message2 = document.querySelector('.resError');
+           //
+           //    if (
+           //
+           //       nameInput.value !== '' &&
+           //
+           //       starsInput.value !== '' &&
+           //
+           //       commentInput.value !== ''
+           //
+           //    ) {
+           //
+           //       fetch('/api/reviews', {
+           //
+           //          method: 'POST',
+           //
+           //          headers: { 'Content-Type': 'application/json' },
+           //
+           //          body: JSON.stringify(insertData)
+           //
+           //       })
+           //
+           //          .then((response) => {
+           //
+           //             response.json();
+           //
+           //          })
+           //
+           //          .then((data) => {
+           //
+           //             message.innerHTML = `Thank you ${nameInput.value}. Your ordered is now succesfully placed.  `;
+           //
+           //          });
+           //
+           //    } else if (
+           //
+           //       nameInput.value == '' ||
+           //
+           //       starsInput.value == '' ||
+           //
+           //       commentInput.value == ''
+           //
+           //    ) {
+           //
+           //       message2.innerHTML = `Please, fill correctly the form.`;
+           //
+           //    }
+           //
+           // });
 
         });
 
@@ -337,4 +293,28 @@ function handleMealRequest(params){
      //router.updatePageLinks();
 
   };
+  async function reviewFormBtnEventHandler(params){
+    const review = {
+      title: form.elements.title,
+      description: form.element.description,
+      review_meal_id: params.id,
+      stars: form.elements.stars,
+      created_date: new Date()
+      //phone_number: phoneInput.value
+    }
+    fetch('/api/reservations', {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: reservation
+    })
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    };
+
   export default handleMealRequest;
