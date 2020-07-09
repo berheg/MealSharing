@@ -28,6 +28,7 @@ li{
 .reservationForm{
   display: flex;
   flex-direction: column;
+  display: none;
 }
 .mealBox{
   display: flex;
