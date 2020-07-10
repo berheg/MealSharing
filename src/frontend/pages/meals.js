@@ -20,6 +20,7 @@ function handleMealRequest(params){
           </div>
       </div>
   </header>
+
   <div class='container' style="height:100%">
       <div class=" col-lg-12">
           <div class="row">
@@ -52,21 +53,11 @@ function handleMealRequest(params){
       <div id="accordion" class="col p-4 mt-12" >
           <div class="card">
               <div class="card-header">
-                  <button class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                  <button class="reviewHideBtn" data-toggle="collapse">
                       <h4 class="reservationTitle">Add a review for ${data[0].title} meals </h4>
                   </button>
               </div>
-              <aside>
-                    <form action="/api/reviews" class="reviewForm">
-                        <h3 class="formHead">Fill in The Review Form </h3>
-                        <label for="name">Review Form</label>
-                        <section class = "mealLists"></section>
-                        <input type="text" class="titleInput" required placeholder="Title" name='title'>
-                        <input type="text" class="descriptionInput" required placeholder="Description" name='description'>
-                        <input type="number"class="starInput" required placeholder="Star in number" name='stars'>
-                        <button class="reviewFormBtn">Submit</button>
-                    </form>
-                </aside>
+
 
           </div>
 
@@ -97,7 +88,17 @@ function handleMealRequest(params){
           </div>
 
       </div>
-
+      <aside>
+            <form action="/api/reviews" class="reviewForm">
+                <h3 class="formHead">Fill in The Review Form </h3>
+                <label for="name">Review Form</label>
+                <section class = "mealLists"></section>
+                <input type="text" class="titleInput" required placeholder="Title" name='title'>
+                <input type="text" class="descriptionInput" required placeholder="Description" name='description'>
+                <input type="number"class="starInput" required placeholder="Star in number" name='stars'>
+                <button class="reviewFormBtn" submit>Submit</button>
+            </form>
+        </aside>
   </div>
 
   <footer>
@@ -132,12 +133,19 @@ function handleMealRequest(params){
       </ul>
     </section>
   </footer>`;
+  const reviewHideBtn=document.querySelector('button.reviewHideBtn');
+  reviewHideBtn.addEventListener('click', ()=>{
+    const reviewForm = document.querySelector('.reviewForm');
+    reviewForm.style.display='flex';
+  })
   const reviewFormBtn = document.querySelector('button.reviewFormBtn');
-  reviewFormBtn.addEventListener('click', ()=>{
-    reviewFormBtnEventHandler(params);
+  reviewFormBtn.addEventListener('click', (e)=>{
+    //e.preventDefault();
+    reviewFormBtnEventHandler(params, e);
   } );
   const reservationButton = document.querySelector('button.reservation-button');
-  reservationButton.addEventListener('click',()=>{
+  reservationButton.addEventListener('click',(e)=>{
+    e.preventDefault();
     const reservationForm = document.querySelector('.reservationForm');
     reservationForm.style.display='flex';
   });
@@ -293,7 +301,8 @@ function handleMealRequest(params){
      //router.updatePageLinks();
 
   };
-  async function reviewFormBtnEventHandler(params){
+  async function reviewFormBtnEventHandler(params, e){
+    const form = e.target;
     const review = {
       title: form.elements.title,
       description: form.element.description,
@@ -307,7 +316,7 @@ function handleMealRequest(params){
       headers: {
         'Content-type': 'application/json'
       },
-      body: reservation
+      body: review
     })
       .then(function (res) {
         console.log(res);
