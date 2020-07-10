@@ -47,6 +47,7 @@ li{
 .reviewForm{
   display: flex;
   flex-direction: column;
+  display: none;
 }
 
 header {
