@@ -12,25 +12,27 @@ app.use(express.json());
 router.use(bodyParser());
 //function returns sql query for adding new review row in mealsharing database
 const addNewReview = function(review) {
+  //const review = JSON.parse(review);
+  const created_date = new Date().toISOString().split('T')[0];
   const sql = `insert into review ` +
               `(title, description, review_meal_id, stars,created_date) ` +
-              `values('${review.title}', '${review.description}','${review.review_meal_id}', '${review.stars}','${review.created_date}')` ;     
+              `values('${review.title}', '${review.description}','${review.review_meal_id}', '${review.stars}','${created_date}')` ;
  return sql;
 };
 
 //returns all rows of the given table
-router.get("/", (request, response) => {  
+router.get("/", (request, response) => {
     pool.query(sqlFunction.getAllRows('review'), function(err, results, fields) {
       if(err){
         console.error(err);
         return;
       }
       response.json(results);
-    });  
+    });
 });
 //add new row in the given table
 router.post("/", (request, response) => {
-  const review = request.body;  
+  const review = request.body;
   pool.query(addNewReview(review), function(err, results, fields) {
     if(err){
       console.error(err);
@@ -47,7 +49,7 @@ router.get("/:id", (request, response) => {
       console.error(err);
       return;
   }
-    response.json(results);    
+    response.json(results);
   });
 });
 //update row with given id in the given table and properties
@@ -60,18 +62,18 @@ router.put("/:id", (request, response) => {
       console.error(err);
       return;
   }
-    response.send(`The row with id of ${reviewId} is updated!`);    
+    response.send(`The row with id of ${reviewId} is updated!`);
   });
 });
-//delete row with given id in the given table 
+//delete row with given id in the given table
 router.delete("/:id", (request, response) => {
-  const reviewId = request.params.id;  
+  const reviewId = request.params.id;
   pool.query(sqlFunction.deleteRowById('review',reviewId), function(err, results, fields) {
     if(err){
       console.error(err);
       return;
-  }    
-    response.send(`The row with id of ${reviewId} is successfully deleted!`);    
+  }
+    response.send(`The row with id of ${reviewId} is successfully deleted!`);
   });
 });
 //Here goes the router
