@@ -10,6 +10,9 @@ header{
   margin-bottom: 50px;
   position: fixed;
 }
+.button-toggle{
+  display: none;
+}
 body{
   text-align: center;
   width: 100%;
@@ -321,6 +324,7 @@ body {
   outline: none;
   border: none;
   z-index: 4;
+  display: none;
 }
 .line-top, .line-middle, .line-bottom {
   width: 35px;
@@ -340,15 +344,39 @@ body {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
-@media (max-width: 722px) {
+.button-container{
+  display: flex;
+  flex-direction: column;
+}
+button.reviewHideBtn, .reservation-button{
+  background-color: blueviolet;
+}
+@media (max-width: 900px) {
+  .container-menu-button{
+    display: block;
+    width: 200px;
+    height: 200px;
+  }
+  .button-toggle{
+    display: block;
+    margin-right: 100px;
+    width: 200px;
+    height: 100px;
+  }
   body{
     text-align: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
   }
   header{
     width: 100%;
     text-align: center;
+  }
+  .container-menu-button{
+    margin-right: 300px;
+    height: 100px;
+    width: 200px;
   }
   .navbar {
     display: none;
