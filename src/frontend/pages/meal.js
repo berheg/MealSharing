@@ -34,12 +34,12 @@ function renderHTML(data){
               const div = document.createElement('figure');
               div.innerHTML = ` <div class="card" style="width: 20rem;" col={6}>
                                  <div class="card-body">
-                                 <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
-                                 <h5 class="card-title">${element.title}</h5>
-                                 <p class="card-text">${element.description}</p>
-                                 <a href="meal/${element.id}" class="btn btn-primary">Read More</a>
+                                   <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
+                                   <h5 class="card-title">${element.title}</h5>
+                                   <p class="card-text">${element.description}</p>
+                                   <a href="meal/${element.id}" class="btn btn-primary">Read More</a>
                                  </div>
-                                 </div>`;
+                               </div>`;
               ulList.appendChild(div);
            });
   }
