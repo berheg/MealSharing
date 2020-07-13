@@ -52,17 +52,17 @@ function getBodyContainer(){
       <img class="logo" src="favicon.ico" alt="Logo of the company"
       />
       <h1 class="logo-h1">ZOLLA RESTURANT</h1>
-      <nav class="navbar">
-        <a href="/">Home</a>
-        <a href="/meals">Menu</a>
-        <a href="/review">Review</a>
-      </nav>
       <nav class = "container-menu-button">
-        <button type="button" className="buttonClassName" onClick={onClickHandle}>
+        <button type="button" className="button-toggle" onClick={onClickHandle}>
           <div className="line-top" />
           <div className="line-middle" />
           <div className="line-bottom" />
         </button>
+      </nav>
+      <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/meals">Menu</a>
+        <a href="/review">Review</a>
       </nav>
     </header>
     <aside>
@@ -140,4 +140,5 @@ function searchMealList(searchKey, mealLists){
   console.log(searchedList);
   renderHTML(searchedList);
 }
+
 export default homeRouter;
