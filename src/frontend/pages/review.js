@@ -80,13 +80,7 @@ function getBodyContainer(){
         <div class="searchList">
             <ul class="searchMealList"></ul>
         </div>
-        <div class="backgroudPic">
-            <img src="../../../assets/vegan.jpg" alt="background picture">
-            <img src="../../../assets/mixed.jpg" alt="background picture">
-            <img src="../../../assets/kitfo.jpg" alt="background picture">
-        </div>
-
-    </div>
+      </div>
     <div class="mealBox">
       <ul  class="mealTitle">
       </ul>
