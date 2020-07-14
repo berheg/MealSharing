@@ -51,36 +51,23 @@ function handleMealRequest(params){
                   <button class="formBtn" submit>Book Seat</button>
                 </form>
             </aside>
-
-              <div class=" col-lg-8">
-                  <div class="row">
-                      <div class="col">
-                          <h1 class="display-1"> ${data[0].title}</h1>
-                      </div>
-                      <div class="row">
-                          <div class="col-lg-5">
-                              <img src="../../../assets/${data[0].title}.jpg" alt="${data[0].title}" />
-                          </div>
-                          <div class="col-lg-4 meal-desciption">
-                              <h2>ABOUT THIS MEAL</h2>
-                              <p>
-                                  <span></span>${data[0].description}
-                              </p>
-                              <p>
-                                <span>
-                                  <i class="fa fa-map-marker"></i>
-                                </span> ${data[0].location}
-                              </p>
-                              <p>
-                                <span>
-                                  Price:
-                                  </span> ${data[0].price} Kr
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
+              <div class="card" style="width: 25rem;" col={8}>
+               <div class="card-body">
+                 <img class="card-img-top" src="../../../assets/${data[0].title}.jpg" alt="${data[0].title}" />
+                 <h5 class="card-title">${data[0].title}</h5>
+                 <p class="card-text">${data[0].description}</p>
+                 <p>
+                   <span>
+                     <i class="fa fa-map-marker"></i>
+                   </span> ${data[0].location}
+                 </p>
+                 <p>
+                   <span>
+                     Price:
+                     </span> ${data[0].price} Kr
+                 </p>
+               </div>
+             </div>
             </div>
           <footer>
             <!-- Footer main -->
