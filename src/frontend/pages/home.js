@@ -31,17 +31,17 @@ function renderHTML(data){
   const ulList = document.querySelector('ul.mealUl');
   ulList.innerHTML='';
   data.forEach((element) => {
-              const div = document.createElement('figure');
-              div.innerHTML = ` <div class="card" style="width: 20rem;" col={6}>
-                                 <div class="card-body">
-                                 <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
-                                 <h5 class="card-title">${element.title}</h5>
-                                 <p class="card-text">${element.description}</p>
-                                 <a href="meal/${element.id}" class="btn btn-primary">Read More</a>
-                                 </div>
-                                 </div>`;
-              ulList.appendChild(div);
-           });
+    const div = document.createElement('figure');
+    div.innerHTML = ` <div class="card" style="width: 20rem;" col={6}>
+                       <div class="card-body">
+                       <img class="card-img-top" src="../../../assets/${element.title}.jpg" alt="${element.title}" />
+                       <h5 class="card-title">${element.title}</h5>
+                       <p class="card-text">${element.description}</p>
+                       <a href="meal/${element.id}" class="btn btn-primary">Read More</a>
+                       </div>
+                       </div>`;
+    ulList.appendChild(div);
+   });
   }
 
 function getBodyContainer(){
@@ -53,10 +53,10 @@ function getBodyContainer(){
       />
       <h1 class="logo-h1">ZOLLA RESTURANT</h1>
       <nav class = "container-menu-button">
-        <button type="button" className="button-toggle" onClick={onClickHandle}>
-          <div className="line-top" />
-          <div className="line-middle" />
-          <div className="line-bottom" />
+        <button type="button" class="button-toggle" onClick={onClickHandle}>
+          <div class="line-top" />
+          <div class="line-middle" />
+          <div class="line-bottom" />
         </button>
       </nav>
       <nav class="navbar">
@@ -84,13 +84,6 @@ function getBodyContainer(){
       <div>
         <div class="searchList">
           <ul class="searchMealList"></ul>
-        </div>
-        <div class="backgroudPic">
-          <figure>
-            <img  src="../../../assets/vegan.jpg" alt="background picture">
-            <img src="../../../assets/mixed.jpg" alt="background picture">
-            <img  src="../../../assets/kitfo.jpg" alt="background picture">
-          </figure>
         </div>
         <ul id="mealList" class="mealUl"></ul>
       </div>
