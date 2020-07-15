@@ -27,7 +27,7 @@ function handleMealRequest(params){
               <button class="reviewHideBtn" data-toggle="collapse">
                   <h4 class="reservationTitle">Add a review for ${data[0].title} meals </h4>
               </button>
-              <button class="reservation-button" data-toggle="collapse" href="#collapseThree">
+              <button class="reservation-show-button" data-toggle="collapse" href="#collapseThree">
                   <h4 class="reservationTitle">Place an order for a ${data[0].title} meal </h4>
               </button>
             </div>
@@ -41,14 +41,14 @@ function handleMealRequest(params){
                     <button class="reviewFormBtn" submit>Submit</button>
                 </form>
 
-                <form action="/api/reservations" class="reservationForm" method="post">
+                <form action="/api/reservations" class="reservationForm" method="POST">
                   <h3 class="formH3">Avialable Reservations:</h3>
                   <label for="name">For ${data[0].title}</label>
                   <input type="number"class="phoneInput" required placeholder="Phone Number">
                   <input type="text" class="nameInput" required placeholder="Name" name =>
                   <input type="email" class="emailInput" required placeholder="Email" name = "email">
                   <input type="number"class="guestInput" required placeholder="Guest Number" name="number_of_guests">
-                  <button class="formBtn" submit>Book Seat</button>
+                  <button class="reservation-submit-button" submit>Book Seat</button>
                 </form>
             </aside>
               <div class="card" style="width: 25rem;" col={8}>
@@ -114,14 +114,18 @@ function handleMealRequest(params){
             e.preventDefault();
             reviewFormBtnEventHandler(data[0].id, e);
           } );
-          const reservationButton = document.querySelector('button.reservation-button');
-            reservationButton.addEventListener('click',(e)=>{
-            e.preventDefault();
+          const reservationShowButton = document.querySelector('button.reservation-show-button');
+            reservationShowButton.addEventListener('click',(e)=>{
+
             reviewForm.style.display='none';
             reservationForm.style.display='flex';
             moveScrollTop();
-            reservationFormBtnEventHandler(data[0].id,e);
             });
+            const reservationSubmitButton = document.querySelector('button.reservation-submit-button');
+            reservationSubmitButton.addEventListener('click', (e)=>{
+              e.preventDefault();
+              reservationFormBtnEventHandler(data[0].id,e);
+            })
           });
         };
   async function reviewFormBtnEventHandler(id){
@@ -131,7 +135,7 @@ function handleMealRequest(params){
     const review = {
       title: titleInput.value,
       description: descriptionInput.value,
-      review_meal_id: id,
+      review_meal_id: parseInt(id),
       stars: starInput.value
       //phone_number: phoneInput.value
     }
