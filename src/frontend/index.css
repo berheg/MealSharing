@@ -324,7 +324,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-button.reviewHideBtn, .reservation-button{
+button.reviewHideBtn, .reservation-show-button{
   background-color: blueviolet;
 }
 @media (max-width: 900px) {
