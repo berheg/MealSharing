@@ -35,19 +35,19 @@ function handleMealRequest(params){
                     <h3 class="formHead">Fill in The Review Form </h3>
                     <label for="name">For ${data[0].title}</label>
                     <section class = "mealLists"></section>
-                    <input type="text"id="titleInput" class="titleInput" required placeholder="Title" name='title'>
-                    <input type="text" class="descriptionInput" required placeholder="Description" name='description'>
-                    <input type="number"class="starInput" required placeholder="Star in number" name='stars'>
+                    <input type="text"id="titleInput" class="titleInput" placeholder="Title" name='title' required>
+                    <input type="text" class="descriptionInput" placeholder="Description" name='description' required>
+                    <input type="number"class="starInput" placeholder="Star in number" name='stars' required>
                     <button class="reviewFormBtn" submit>Submit</button>
                 </form>
 
                 <form action="/api/reservations" class="reservationForm" method="POST">
                   <h3 class="formH3">Avialable Reservations:</h3>
                   <label for="name">For ${data[0].title}</label>
-                  <input type="number"class="phoneInput" required placeholder="Phone Number">
-                  <input type="text" class="nameInput" required placeholder="Name" name =>
-                  <input type="email" class="emailInput" required placeholder="Email" name = "email">
-                  <input type="number"class="guestInput" required placeholder="Guest Number" name="number_of_guests">
+                  <input type="number"class="phoneInput" placeholder="Phone Number" required>
+                  <input type="text" class="nameInput" placeholder="Name" name = "name" required>
+                  <input type="email" class="emailInput" placeholder="Email" name = "email" required>
+                  <input type="number"class="guestInput" placeholder="Guest Number" name="number_of_guests" required>
                   <button class="reservation-submit-button" submit>Book Seat</button>
                 </form>
             </aside>
